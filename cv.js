@@ -3,7 +3,6 @@ var arDrone = require('ar-drone');
 var client  = arDrone.createClient();
 var events = require('events');
 var messenger = new events.EventEmitter();
-var huntingState = false;
 
 // access the head camera
 client.config('video:video_channel', 0);
@@ -24,13 +23,12 @@ function faceRec(client, cv) {
       console.log(faces.length);
 
       if(faces && faces.length > 0) {
-        messenger.emit('face:found')
+       // messenger.emit('face:found')
+        client.stop();
+        client.land();
       }
       else {
-        if(huntingState == false){
-          messenger.emit('face:not:found')
-          huntingState = true;
-        }
+        messenger.emit('face:not:found')
       }
     });
 
@@ -46,7 +44,6 @@ function goForward() {
   client.forward(0.2);
   client.after(1000, function() {
     client.stop();
-    huntingState = false;
   });
 }
 
@@ -56,21 +53,6 @@ function lookForFaces() {
   client.stop();
   client.clockwise(.3);
 }
-
-function hunt () {
-
-}
-
-function track() {
-
-}
-
-messenger.on('face:found', function() {
-  goForward();
-});
-messenger.on('face:not:found', function() {
-  lookForFaces();
-});
 
 setTimeout(function() {client.land();}, 20000)
 
@@ -83,6 +65,12 @@ client
   .after(1300, function() {
     this.stop();
     faceRec(client, cv);
+    messenger.on('face:found', function() {
+      goForward();
+    });
+    messenger.on('face:not:found', function() {
+      lookForFaces();
+    });
   });
 
 // client.createRepl();
