@@ -10,19 +10,38 @@ function faceRec(client, cv) {
 
   stream.on('data', function(matrix){
     matrix.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
-      console.log("found " + faces.length + " faces:");
-      for (var i=0;i<faces.length; i++){
-        console.log("face[" + i + "]:");
-        var x = faces[i]
-        matrix.ellipse(x.x + x.width/2, x.y + x.height/2, x.width/2, x.height/2);
-        matrix.save('./faces/face' + new Date().getTime() + '.jpg');
+      if(err){
+        console.log('error: ' + err)
       }
+      else {
+        console.log('no err')
+      }
+
+      if()
     });
 
   })
 
   client.getPngStream().pipe(stream);
 }
+
+function goForward() {
+  client.stop();
+  client.forward(.2);
+  client.after(1000, function() {
+    client.stop();
+  });
+}
+
+function lookForFaces() {
+  client.stop();
+  client.clockwise(.3);
+  client.after(1000, function() {
+    client.stop();
+  });
+}
+
+setTimeout(function() {client.land();}, 20000)
 
 client.takeoff();
 

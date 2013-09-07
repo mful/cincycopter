@@ -1,0 +1,58 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'ffmpeg' ]
+2 info using npm@1.3.10
+3 info using node@v0.10.18
+4 verbose node symlink /usr/local/bin/node
+5 warn package.json opencv@0.3.1 No repository field.
+6 verbose cache add [ 'ffmpeg', null ]
+7 verbose cache add name=undefined spec="ffmpeg" args=["ffmpeg",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'ffmpeg',
+8 verbose parsed url   path: 'ffmpeg',
+8 verbose parsed url   href: 'ffmpeg' }
+9 silly lockFile 037917f6-ffmpeg ffmpeg
+10 verbose lock ffmpeg /Users/matthewfulton/.npm/037917f6-ffmpeg.lock
+11 silly lockFile 037917f6-ffmpeg ffmpeg
+12 silly lockFile 037917f6-ffmpeg ffmpeg
+13 verbose addNamed [ 'ffmpeg', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile b00d4fc2-ffmpeg ffmpeg@
+16 verbose lock ffmpeg@ /Users/matthewfulton/.npm/b00d4fc2-ffmpeg.lock
+17 silly addNameRange { name: 'ffmpeg', range: '*', hasData: false }
+18 verbose url raw ffmpeg
+19 verbose url resolving [ 'https://registry.npmjs.org/', './ffmpeg' ]
+20 verbose url resolved https://registry.npmjs.org/ffmpeg
+21 info trying registry request attempt 1 at 14:35:55
+22 http GET https://registry.npmjs.org/ffmpeg
+23 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+24 info trying registry request attempt 2 at 14:36:05
+25 http GET https://registry.npmjs.org/ffmpeg
+26 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+27 info trying registry request attempt 3 at 14:37:05
+28 http GET https://registry.npmjs.org/ffmpeg
+29 silly lockFile b00d4fc2-ffmpeg ffmpeg@
+30 silly lockFile b00d4fc2-ffmpeg ffmpeg@
+31 error network getaddrinfo ENOTFOUND
+31 error network This is most likely not a problem with npm itself
+31 error network and is related to network connectivity.
+31 error network In most cases you are behind a proxy or have bad network settings.
+31 error network
+31 error network If you are behind a proxy, please make sure that the
+31 error network 'proxy' config is set properly.  See: 'npm help config'
+32 error System Darwin 12.4.0
+33 error command "node" "/usr/local/bin/npm" "install" "ffmpeg"
+34 error cwd /Users/matthewfulton/projects/cincycopter
+35 error node -v v0.10.18
+36 error npm -v 1.3.10
+37 error syscall getaddrinfo
+38 error code ENOTFOUND
+39 error errno ENOTFOUND
+40 verbose exit [ 1, true ]
