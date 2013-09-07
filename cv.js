@@ -9,31 +9,20 @@ function faceRec(client, cv) {
   var stream = new cv.ImageStream()
 
   stream.on('data', function(matrix){
-    matrix.save('./pic.jpg');
-    // console.log(matrix.goodFeaturesToTrack());
-    matrix.detectObject(cv.FACE_CASCADE, {}, function(err, matches){
-      if(err) {
-        console.log("err: " + err);
-      }else if(matches.length > 0) {
-        console.log("matches: " + matches.length);
-        client.front(0.1);
-      }else{
-        // client.clockwise(0.2);
-        client.stop();
+    matrix.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
+      console.log("found " + faces.length + " faces:");
+      for (var i=0;i<faces.length; i++){
+        console.log("face[" + i + "]:");
+        var x = faces[i]
+        matrix.ellipse(x.x + x.width/2, x.y + x.height/2, x.width/2, x.height/2);
+        matrix.save('./faces/face' + new Date().getTime() + '.jpg');
       }
-    })
+    });
+
   })
 
   client.getPngStream().pipe(stream);
 }
-
-// client.takeoff(function() {
-//   client.up(1);
-
-//   client.stop();
-
-//   faceRec(client, cv);
-// });
 
 client.takeoff();
 
@@ -41,7 +30,7 @@ client
   .after(3000, function() {
     this.up(1);
   })
-  .after(1000, function() {
+  .after(1300, function() {
     this.stop();
     faceRec(client, cv);
   });
